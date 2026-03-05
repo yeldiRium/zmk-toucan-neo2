@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/caksoylar
     - name: geeksville
       url-base: https://github.com/geeksville
+    - name: zmk-locales
+      url-base: https://github.com/joelspadin/zmk-locales
   projects:
     - name: zmk
       remote: zmkfirmware
