@@ -109,7 +109,7 @@
             bindings = <
                 &none       &kp DE_X        &kp DE_V        &kp DE_L        &kp DE_C        &kp DE_W                        &kp DE_K            &kp DE_H            &kp DE_G            &kp DE_F        &kp DE_Q        &capital_ss
                 &none       &hm_l LGUI DE_U &hm_l LALT DE_I &hm_l LCTRL DE_A &hm_l LSHFT DE_E &lt_neo3 NEO_3_R DE_O         &lt_neo3 NEO_3_L DE_S &hm_r LSHFT DE_N  &hm_r LCTRL DE_R    &hm_r LALT DE_T &hm_r LGUI DE_D &kp DE_Y
-                &none       &kp DE_A_UMLAUT &kp DE_O_UMLAUT &kp DE_A_UMLAUT &kp DE_P        &kp DE_Z                        &kp DE_B            &kp DE_M            &em_dash            &middle_dot     &kp DE_J        &none
+                &none       &kp DE_U_UMLAUT &kp DE_O_UMLAUT &kp DE_A_UMLAUT &kp DE_P        &kp DE_Z                        &kp DE_B            &kp DE_M            &em_dash            &middle_dot     &kp DE_J        &none
                                                             &mo FUNCTION    &mo NEO_4_R     &mo MOUSE                       &kp SPACE           &mo NEO_4_L         &mo MEDIA
             >;
         };
