@@ -106,7 +106,7 @@
         neo_3_l {
             display-name = "NEO 3L";
             bindings = <
-                &kp DE_DEG  &kp ellipsis    &kp DE_UNDER    &kp DE_LBKT     &kp DE_RBKT     &kp DE_CARET                    &none               &none               &none               &none           &none           &none
+                &kp DE_DEG  &kp DE_ELL      &kp DE_UNDER    &kp DE_LBKT     &kp DE_RBKT     &kp DE_CARET                    &none               &none               &none               &none           &none           &none
                 &none       &kp DE_BSLH     &kp DE_FSLH     &kp DE_LBRC     &kp DE_RBRC     &kp DE_ASTRK                    &none               &none               &kp LCTRL           &kp LGUI        &kp RGUI        &none
                 &trans      &kp DE_HASH     &kp DE_DLLR     &kp DE_PIPE     &kp DE_TILDE    &kp DE_GRAVE                    &none               &none               &none               &none           &none           &trans
                                                             &none           &none           &none                           &none               &none               &none
