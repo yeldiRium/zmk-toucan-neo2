@@ -1,0 +1,194 @@
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/bt.h>
+#include "de-osx.h"
+
+// Layer definitions
+#define NEO_1     0
+#define NEO_3_R   1
+#define NEO_3_L   2
+#define NEO_4_R   3
+#define NEO_4_L   4
+#define FUNCTION  5
+#define MOUSE     6
+#define MEDIA     7
+
+/ {
+    behaviors {
+        // Home row mods with 200ms tapping term (matching QMK config)
+        hm_l: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41>; // right hand + right thumbs only
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38>; // left hand + left thumbs only
+        };
+
+        // Layer-tap behavior for Neo3 layers
+        lt_neo3: layer_tap_neo3 {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+        };
+
+        // Mod-morph for em dash (Shift + comma → –)
+        em_dash: em_dash {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DE_COMMA>, <&kp RA(DE_MINUS)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Mod-morph for middle dot (Shift + dot → ·)
+        middle_dot: middle_dot {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DE_DOT>, <&kp LS(RA(DE_DOT))>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Mod-morph for capital ß (Shift + ß → ẞ)
+        capital_ss: capital_ss {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DE_SZ>, <&kp LS(RA(S))>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    macros {
+        // Macro for … (ellipsis)
+        ellipsis: ellipsis {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(DE_DOT)>;
+        };
+
+        // Macro for ¡ (inverted exclamation)
+        inv_excl: inv_excl {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(RA(N1))>;
+        };
+
+        // Macro for ¿ (inverted question mark)
+        inv_ques: inv_ques {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(RA(DE_SZ))>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // NEO Layer 1 (Base)
+        neo_1 {
+            display-name = "NEO 1";
+            bindings = <
+                &none       &kp DE_X        &kp DE_V        &kp DE_L        &kp DE_C        &kp DE_W                        &kp DE_K            &kp DE_H            &kp DE_G            &kp DE_F        &kp DE_Q        &capital_ss
+                &none       &hm_l RGUI DE_U &hm_l LGUI DE_I &hm_l LCTRL DE_A &hm_l LSHFT DE_E &lt_neo3 NEO_3_R DE_O         &lt_neo3 NEO_3_L DE_S &hm_r LSHFT DE_N  &hm_r LCTRL DE_R    &hm_r LGUI DE_T &hm_r RGUI DE_D &kp DE_Y
+                &kp LALT    &kp DE_U_UMLAUT &kp DE_O_UMLAUT &kp DE_A_UMLAUT &kp DE_P        &kp DE_Z                        &kp DE_B            &kp DE_M            &em_dash            &middle_dot     &kp DE_J        &kp LALT
+                                                            &mo FUNCTION    &mo NEO_4_R     &mo MOUSE                       &kp SPACE           &mo NEO_4_L         &mo MEDIA
+            >;
+        };
+
+        // NEO Layer 3 Right (activated by holding O)
+        neo_3_r {
+            display-name = "NEO 3R";
+            bindings = <
+                &none       &none           &none           &none           &none           &none                           &kp DE_EXCL         &kp DE_LT           &kp DE_GT           &kp DE_EQUAL    &kp DE_AMPS     &kp DE_EURO
+                &none       &kp RGUI        &kp LGUI        &kp LCTRL       &none           &none                           &kp DE_QMARK        &kp DE_LPAR         &kp DE_RPAR         &kp DE_MINUS    &kp DE_COLON    &kp DE_AT
+                &trans      &none           &none           &none           &none           &none                           &kp DE_PLUS         &kp DE_PRCNT        &kp DE_DQT          &kp DE_SQT      &kp DE_SEMI     &trans
+                                                            &none           &none           &none                           &none               &none               &none
+            >;
+        };
+
+        // NEO Layer 3 Left (activated by holding S)
+        neo_3_l {
+            display-name = "NEO 3L";
+            bindings = <
+                &kp DE_DEG  &ellipsis       &kp DE_UNDER    &kp DE_LBKT     &kp DE_RBKT     &kp DE_CARET                    &none               &none               &none               &none           &none           &none
+                &none       &kp DE_BSLH     &kp DE_FSLH     &kp DE_LBRC     &kp DE_RBRC     &kp DE_ASTRK                    &none               &none               &kp LCTRL           &kp LGUI        &kp RGUI        &none
+                &trans      &kp DE_HASH     &kp DE_DLLR     &kp DE_PIPE     &kp DE_TILDE    &kp DE_GRAVE                    &none               &none               &none               &none           &none           &trans
+                                                            &none           &none           &none                           &none               &none               &none
+            >;
+        };
+
+        // NEO Layer 4 Right (activated by left thumb, note the cross-activation)
+        neo_4_r {
+            display-name = "NEO 4R";
+            bindings = <
+                &none       &none           &none           &none           &none           &none                           &inv_excl           &kp DE_N7           &kp DE_N8           &kp DE_N9       &none           &none
+                &none       &kp RGUI        &kp LGUI        &kp LCTRL       &kp LSHFT       &kp END                         &inv_ques           &kp DE_N4           &kp DE_N5           &kp DE_N6       &kp DE_COMMA    &kp DE_DOT
+                &trans      &none           &none           &none           &none           &none                           &none               &kp DE_N1           &kp DE_N2           &kp DE_N3       &none           &trans
+                                                            &none           &none           &none                           &none               &none               &kp DE_N0
+            >;
+        };
+
+        // NEO Layer 4 Left (activated by right thumb, note the cross-activation)
+        neo_4_l {
+            display-name = "NEO 4L";
+            bindings = <
+                &none       &kp PG_UP       &kp BSPC        &kp UP          &kp DEL         &kp PG_DN                       &none               &none               &none               &none           &none           &none
+                &none       &kp HOME        &kp LEFT        &kp DOWN        &kp RIGHT       &kp END                         &none               &kp LSHFT           &kp LCTRL           &kp LGUI        &kp RGUI        &none
+                &trans      &kp ESC         &kp TAB         &kp INS         &kp RET         &kp K_UNDO                      &none               &none               &none               &none           &none           &trans
+                                                            &none           &none           &none                           &none               &none               &none
+            >;
+        };
+
+        // Function layer
+        function {
+            display-name = "FN";
+            bindings = <
+                &bt BT_CLR  &none           &none           &none           &none           &none                           &none               &kp F7              &kp F8              &kp F9          &kp F10         &none
+                &bt BT_NXT  &kp RGUI        &kp LGUI        &kp LCTRL       &kp LSHFT       &none                           &none               &kp F4              &kp F5              &kp F6          &kp F11         &none
+                &bt BT_PRV  &none           &none           &none           &none           &none                           &none               &kp F1              &kp F2              &kp F3          &kp F12         &trans
+                                                            &none           &none           &none                           &none               &none               &none
+            >;
+        };
+
+        // Mouse layer
+        mouse {
+            display-name = "MOUSE";
+            bindings = <
+                &none       &none           &none           &none           &none           &none                           &none               &none               &none               &none           &none           &none
+                &none       &kp RGUI        &kp LGUI        &kp LCTRL       &kp LSHFT       &none                           &none               &mmv MOVE_LEFT      &mmv MOVE_DOWN      &mmv MOVE_UP    &mmv MOVE_RIGHT &none
+                &trans      &none           &none           &none           &none           &none                           &none               &msc SCRL_LEFT      &msc SCRL_DOWN      &msc SCRL_UP    &msc SCRL_RIGHT &trans
+                                                            &none           &none           &none                           &kp K_APP           &mkp LCLK           &mkp RCLK
+            >;
+        };
+
+        // Media layer
+        media {
+            display-name = "MEDIA";
+            bindings = <
+                &none       &kp C_PREV      &kp C_PP        &kp C_NEXT      &none           &none                           &none               &none               &none               &none           &none           &none
+                &none       &kp C_VOL_DN    &kp C_VOL_UP    &kp C_MUTE      &none           &none                           &none               &kp LSHFT           &kp LCTRL           &kp LGUI        &kp RGUI        &none
+                &trans      &none           &none           &none           &none           &none                           &none               &none               &none               &none           &none           &trans
+                                                            &none           &none           &none                           &none               &none               &none
+            >;
+        };
+    };
+};
