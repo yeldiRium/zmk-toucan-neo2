@@ -10,6 +10,11 @@ zmk_locale_generator single DE <path-to-cldr>/keybords/windows/de-t-k0-windows.x
 zmk_locale_generator single DE <path-to-cldr>/keybords/osx/de-t-k0-osx.xml > config/de-osx.h
 ```
 
+## Branches
+
+This repo has two relevant branches: `windows` and `osx`. They are kept in sync as much as possible.
+Their purpose should be self-explanatory.
+
 # License
 
 The code in this repo is available under the MIT license.
