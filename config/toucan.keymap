@@ -56,7 +56,7 @@
         em_dash: em_dash {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp DE_COMMA>, <&kp RA(DE_MINUS)>;
+            bindings = <&kp DE_COMMA>, <&kp DE_EM_DASH>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -64,7 +64,7 @@
         middle_dot: middle_dot {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp DE_DOT>, <&kp LS(RA(DE_DOT))>;
+            bindings = <&kp DE_DOT>, <&kp DE_MIDDOT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -74,29 +74,6 @@
             #binding-cells = <0>;
             bindings = <&kp DE_SZ>, <&kp LS(RA(S))>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-    };
-
-    macros {
-        // Macro for … (ellipsis)
-        ellipsis: ellipsis {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp RA(DE_DOT)>;
-        };
-
-        // Macro for ¡ (inverted exclamation)
-        inv_excl: inv_excl {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LS(RA(N1))>;
-        };
-
-        // Macro for ¿ (inverted question mark)
-        inv_ques: inv_ques {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LS(RA(DE_SZ))>;
         };
     };
 
@@ -129,7 +106,7 @@
         neo_3_l {
             display-name = "NEO 3L";
             bindings = <
-                &kp DE_DEG  &ellipsis       &kp DE_UNDER    &kp DE_LBKT     &kp DE_RBKT     &kp DE_CARET                    &none               &none               &none               &none           &none           &none
+                &kp DE_DEG  &kp ellipsis    &kp DE_UNDER    &kp DE_LBKT     &kp DE_RBKT     &kp DE_CARET                    &none               &none               &none               &none           &none           &none
                 &none       &kp DE_BSLH     &kp DE_FSLH     &kp DE_LBRC     &kp DE_RBRC     &kp DE_ASTRK                    &none               &none               &kp LCTRL           &kp LGUI        &kp RGUI        &none
                 &trans      &kp DE_HASH     &kp DE_DLLR     &kp DE_PIPE     &kp DE_TILDE    &kp DE_GRAVE                    &none               &none               &none               &none           &none           &trans
                                                             &none           &none           &none                           &none               &none               &none
@@ -140,8 +117,8 @@
         neo_4_r {
             display-name = "NEO 4R";
             bindings = <
-                &none       &none           &none           &none           &none           &none                           &inv_excl           &kp DE_N7           &kp DE_N8           &kp DE_N9       &none           &none
-                &none       &kp RGUI        &kp LGUI        &kp LCTRL       &kp LSHFT       &kp END                         &inv_ques           &kp DE_N4           &kp DE_N5           &kp DE_N6       &kp DE_COMMA    &kp DE_DOT
+                &none       &none           &none           &none           &none           &none                           &kp DE_IEXCL        &kp DE_N7           &kp DE_N8           &kp DE_N9       &none           &none
+                &none       &kp RGUI        &kp LGUI        &kp LCTRL       &kp LSHFT       &kp END                         &kp DE_IQMARK       &kp DE_N4           &kp DE_N5           &kp DE_N6       &kp DE_COMMA    &kp DE_DOT
                 &trans      &none           &none           &none           &none           &none                           &none               &kp DE_N1           &kp DE_N2           &kp DE_N3       &none           &trans
                                                             &none           &none           &none                           &none               &none               &kp DE_N0
             >;
